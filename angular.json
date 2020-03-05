@@ -19,7 +19,7 @@
           "options": {
             "progress": true,
             "extractCss": true,
-            "outputPath": "dist",
+            "outputPath": "dist/cityton",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
