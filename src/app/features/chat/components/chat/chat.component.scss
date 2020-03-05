@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.input-zone {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.input-zone-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+#bottomChat {
+  position: fixed;
+  //   width: 50%;
+  bottom: 15px;
+  //   border: 3px solid #8AC007;
+  align-self: center;
+}
+
+#chat {
+  display: flex;
+  flex-direction: column;
+}
+
+#chat div {
+  // border: black 3px solid;
+  border-radius: 15px;
+  margin: 5px;
+  padding: 5px;
+  // max-width: 300px;
+}
+
+.author {
+  font-size: small;
+  color: grey;
+}
+
+.removed {
+  font-style: italic;
+  color: grey;
+}

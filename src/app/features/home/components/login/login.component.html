@@ -1,0 +1,42 @@
+<section>
+
+  <h1>
+    Hey you !
+  </h1>
+  <h2>
+    Happy to see you again !
+  </h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div mat-dialog-content>
+
+      <mat-form-field>
+        <label>Email *</label>
+        <input matNativeControl type="text" formControlName="email">
+
+        <mat-error *ngIf="loginForm.get('email').hasError('required')"> Email required </mat-error>
+        <mat-error *ngIf="loginForm.get('email').hasError('email')"> Wrong format email </mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>Password *</label>
+        <input matNativeControl type="password" formControlName="password">
+
+        <mat-error *ngIf="loginForm.get('password').hasError('required')"> Password required </mat-error>
+
+      </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+
+      <button mat-raised-button color="accent" type="button" (click)="cancel()"> Cancel </button>
+      <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid"> Submit </button>
+
+    </div>
+
+  </form>
+
+</section>

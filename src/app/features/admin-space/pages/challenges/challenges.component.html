@@ -1,0 +1,15 @@
+<section>
+
+  <ng-container *ngIf="(challengesToApprove$ | async) as challengesToApprove">
+    <app-waiting-approval (toValidate)="validate($event)" (toDelete)="deleteFromToApprove($event)"
+      [challengesToApprove]="challengesToApprove"></app-waiting-approval>
+  </ng-container>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="(challengesSearched$ | async) as challengesSearched">
+    <app-search-challenges (toEdit)="edit($event)" (toDelete)="deleteFromSearch($event)" (toSearch)="searchChallenge($event)"
+      [challengesSearched]="challengesSearched" [searchField]="searchField"></app-search-challenges>
+  </ng-container>
+
+</section>

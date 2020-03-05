@@ -1,0 +1,23 @@
+<h1> Change email </h1>
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <label> Email </label>
+    <input matNativeControl type="text" formControlName="email">
+    <mat-hint> At least 8 characters </mat-hint>
+
+    <mat-error *ngIf="emailForm.get('email').hasError('required')"> Email required </mat-error>
+    <mat-error *ngIf="emailForm.get('email').hasError('email')"> Wrong email format </mat-error>
+
+  </mat-form-field>
+
+  <ng-container *ngIf="emailForm.get('email').invalid">
+    <mat-error *ngIf="emailForm.get('email').errors?.uniqueEmail"> Email is already taken. </mat-error>
+  </ng-container>
+
+  <br>
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="!emailForm.valid"> Submit </button>
+  <button mat-raised-button color="accent" type="button" (click)="cancel(emailForm)"> Cancel </button>
+
+</form>

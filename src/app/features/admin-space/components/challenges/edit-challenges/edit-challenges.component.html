@@ -1,0 +1,56 @@
+<h1 mat-dialog-title> Edit challenge {{ data.name }} </h1>
+
+<form [formGroup]="editChallengeForm">
+
+  <div mat-dialog-content>
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" #groupName formControlName="name">
+      <mat-hint>
+        At least 3 characters
+        <!-- <br> -->
+        At least 50 characters
+      </mat-hint>
+
+      <mat-error *ngIf="editChallengeForm.get('name').hasError('required')"> Is Required </mat-error>
+      <mat-error *ngIf="editChallengeForm.get('name').hasError('minlength')"> At least 3 characters </mat-error>
+      <mat-error *ngIf="editChallengeForm.get('name').hasError('maxlength')"> At maximum 50 characters </mat-error>
+
+    </mat-form-field>
+
+    <ng-container *ngIf="editChallengeForm.get('name').invalid">
+      <mat-error *ngIf="editChallengeForm.get('name').errors?.uniqueName"> This name is already taken
+      </mat-error>
+    </ng-container>
+
+    <!-- ******************************************************** -->
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" #groupName formControlName="name">
+      <mat-hint>
+        At least 10 characters
+        <!-- <br> -->
+        At least 100 characters
+      </mat-hint>
+
+      <mat-error *ngIf="editChallengeForm.get('statement').hasError('required')"> Is Required </mat-error>
+      <mat-error *ngIf="editChallengeForm.get('statement').hasError('minlength')"> At least 10 characters </mat-error>
+      <mat-error *ngIf="editChallengeForm.get('statement').hasError('maxlength')"> At maximum 100 characters
+      </mat-error>
+
+    </mat-form-field>
+
+  </div>
+
+  <!-- ******************************************************** -->
+
+  <div mat-dialog-actions>
+
+    <button mat-raised-button color="accent" type="button" (click)="submit()" [disabled]="editChallengeForm.invalid">
+      Submit
+    </button>
+    <button mat-raised-button color="accent" type="button" (click)="cancel()"> Cancel </button>
+
+  </div>
+
+</form>

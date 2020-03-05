@@ -1,0 +1,31 @@
+<section *ngIf="(challengeList$ | async) as challengeList">
+
+  <h1> Global challenges stats </h1>
+
+  <ng-container *ngFor="let challenge of challengeList">
+
+    <mat-card [ngStyle]="{'border':challenge.unlockedAt != null ? '3px solid green' : '0px' }">
+
+      <mat-card-header>
+        <mat-card-title> {{challenge.name}} </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        {{ challenge.statement }}
+
+        <div id="author">
+          {{ challenge.author }}
+        </div>
+
+        <div id="pourcentage">
+          {{ (challenge.successRate / 100) | percent:'1.1-1' }}
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  </ng-container>
+
+</section>

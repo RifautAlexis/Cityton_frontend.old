@@ -1,0 +1,35 @@
+mat-card {
+  width: 500px;
+  height: auto;
+  margin: 25px 0 0 0;
+
+  mat-card-content {
+    .author {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+    }
+  }
+
+  mat-card-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    button {
+      display: none;
+    }
+  }
+
+}
+
+mat-card:hover {
+  mat-card-actions {
+    display: flex;
+
+    button {
+      display: block;
+      margin: 0 15px 0 0;
+    }
+  }
+}

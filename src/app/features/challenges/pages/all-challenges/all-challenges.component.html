@@ -1,0 +1,64 @@
+<section *ngIf="(challengeList$ | async) as challengeList">
+
+  <h1> Your achievements </h1>
+
+  <ng-container *ngIf="unlockedChallenges.length > 0">
+
+    <div id="progressChallenges">
+      {{nbUnlockedChallenges}} / {{nbUnlockedChallenges + nbLockedChallenges}} ({{ (percentSucceedChallenges) | percent:'1.1-1' }}) achievements earned
+      <mat-progress-bar mode="determinate" value="{{percentSucceedChallenges * 100}}"></mat-progress-bar>
+    </div>
+
+    <ng-container *ngFor="let challenge of unlockedChallenges">
+
+      <mat-card [ngStyle]="{'border':challenge.unlockedAt != null ? '3px solid green' : '0px' }">
+
+        <mat-card-header>
+          <mat-card-title> {{challenge.title}} </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          {{ challenge.statement }}
+
+          <div class="author">
+            {{ challenge.author }}
+          </div>
+
+          <div id="unlockedAt" *ngIf="challenge.unlockedAt">
+            Unlocked {{ challenge.unlockedAt | date:"dd/MM/yyyy @ HH:mm" }}
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+
+    </ng-container>
+
+    <mat-divider></mat-divider>
+
+  </ng-container>
+
+  <ng-container *ngFor="let challenge of lockedChallenges">
+
+    <mat-card>
+
+      <mat-card-header>
+        <mat-card-title> {{challenge.title}} </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        {{ challenge.statement }}
+
+        <div class="author">
+          {{ challenge.author }}
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  </ng-container>
+
+</section>

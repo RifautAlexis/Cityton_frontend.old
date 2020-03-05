@@ -1,0 +1,39 @@
+mat-sidenav-container {
+  height: 100vh;
+}
+
+#menu {
+  mat-list-item {
+    margin-top: 15px;
+  }
+
+  button:hover {
+    transition: 0.5s;
+    border-radius: 10px;
+  }
+}
+
+#subMenu {
+  width: 200px;
+
+  mat-list-item {
+    width: auto;
+    margin: 10px 5px 0 5px;
+    cursor: pointer;
+  }
+
+  mat-list-item:hover {
+    border-radius: 20px;
+    background-color: rgba(66, 66, 66, 1);
+  }
+}
+
+#content {
+  padding: 25px 0 0 25px;
+}
+
+.buttonRename {
+  position: absolute;
+  top: 0px;
+  right: 0;
+}

@@ -1,0 +1,37 @@
+<section>
+
+  <h1> Create a group </h1>
+  <form [formGroup]="createChallengeForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <label> Challenge name </label>
+      <input matNativeControl type="text" formControlName="name">
+
+      <mat-error *ngIf="createChallengeForm.get('name').hasError('required')"> Name required </mat-error>
+      <mat-error *ngIf="createChallengeForm.get('name').hasError('minlength')"> At least 3 characters required
+      </mat-error>
+
+    </mat-form-field>
+
+    <ng-container *ngIf="createChallengeForm.get('name').invalid">
+      <mat-error *ngIf="createChallengeForm.get('name').errors?.uniqueName"> This name is already taken </mat-error>
+    </ng-container>
+
+    <mat-form-field>
+      <label> Challenge statement </label>
+      <input matNativeControl type="text" formControlName="statement">
+
+      <mat-error *ngIf="createChallengeForm.get('statement').hasError('required')"> Statement required </mat-error>
+      <mat-error *ngIf="createChallengeForm.get('statement').hasError('minlength')"> At least 10 characters required
+      </mat-error>
+
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="accent" type="submit" [disabled]="!createChallengeForm.valid"> Submit </button>
+    <button mat-raised-button color="accent" type="button" (click)="cancel(createChallengeForm)"> Cancel </button>
+
+  </form>
+
+</section>

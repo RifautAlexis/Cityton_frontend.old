@@ -1,0 +1,15 @@
+<h1> Change picture </h1>
+
+<ng-container *ngIf="connectedUser">
+  <img [src]="url" >
+</ng-container>
+
+
+<br>
+
+<input mat-raised-button #fileInput id="fileInput" type='file' (click)="fileInput.value = null" value=""  (change)="preview($event.target.files)">
+
+<br>
+
+<button mat-raised-button color="accent" class="btn btn-default" *ngIf="url" (click)="onSelectFile()">submit</button>
+<button mat-raised-button color="accent" class="btn btn-default" *ngIf="url" (click)="delete()">delete</button>

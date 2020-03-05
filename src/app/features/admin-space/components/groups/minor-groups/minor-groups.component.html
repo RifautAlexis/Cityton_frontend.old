@@ -1,0 +1,38 @@
+<section>
+
+  <h1> groups whose size is not satisfied </h1>
+
+  <ng-container *ngFor="let group of minorGroups">
+
+    <mat-card>
+
+      <mat-card-header>
+        <mat-card-title> {{group.name}} </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <div *ngFor="let member of group.members" class="username">
+          {{ member.username }}
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-mini-fab (click)="openEditGroup(group.id)">
+          <i class="material-icons">
+            build
+          </i>
+        </button>
+        <button mat-mini-fab (click)="deleteGroup(group.id)">
+          <i class="material-icons">
+            delete
+          </i>
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </ng-container>
+
+</section>

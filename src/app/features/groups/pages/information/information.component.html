@@ -1,0 +1,71 @@
+<section *ngIf="group">
+
+  <h1> Members </h1>
+
+  <mat-grid-list cols="2" rowHeight="40px">
+
+    <ng-container *ngFor="let member of group.groupDetails.members">
+
+      <mat-grid-tile> {{member.username}} </mat-grid-tile>
+
+    </ng-container>
+
+  </mat-grid-list>
+
+  <mat-divider></mat-divider>
+
+  <h1> Informations </h1>
+
+  <p>
+    Name : {{group.groupDetails.name}}
+    <br>
+    <span>Creator : {{creator}}</span>
+    <br>
+    Creation date : {{group.groupDetails.createdAt}}
+  </p>
+
+  <mat-divider></mat-divider>
+
+  <h1> Challenges succeed </h1>
+
+  <p> In progress </p>
+
+  <mat-divider></mat-divider>
+
+  <h1> Membership request </h1>
+
+  <mat-list *ngIf="group.groupDetails.membershipRequests.length > 0">
+
+    <ng-container *ngFor="let request of group.groupDetails.membershipRequests">
+
+      <mat-list-item>
+        {{request.username}}
+        <div id="requestButtons" *ngIf="isCreator">
+          <button mat-raised-button color="accent" type="button" (click)="acceptRequest(request.requestId)" *ngIf="group.groupDetails.members.length < group.maxGroupSize"> Accept </button>
+          <button mat-raised-button color="accent" type="button" (click)="declineRequest(request.requestId)"> Decline </button>
+        </div>
+
+      </mat-list-item>
+
+    </ng-container>
+
+  </mat-list>
+
+  <ng-container *ngIf="isCreator || isMember">
+
+    <mat-divider></mat-divider>
+
+    <h1> Action </h1>
+
+    <button mat-mini-fab (click)="openEditGroup(group.groupDetails.groupId)" *ngIf="isCreator">
+      <i class="material-icons">
+        build
+      </i>
+    </button>
+    <button mat-raised-button color="accent" type="button" (click)="leaveGroup()"> Leave group </button>
+
+    <p *ngIf="isCreator">Warning : leaving your group will delete it !</p>
+
+  </ng-container>
+
+</section>

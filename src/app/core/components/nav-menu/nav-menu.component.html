@@ -1,0 +1,153 @@
+<mat-sidenav-container>
+
+  <mat-sidenav mode="side" opened id="menu">
+
+    <mat-list>
+      <mat-list-item>
+        <button mat-fab (click)="selectMenu('settings')">
+          <i class="material-icons">
+            build
+          </i>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-fab (click)="selectMenu('chat')">
+          <i class="material-icons">
+            chat
+          </i>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-fab (click)="selectMenu('groups')">
+          <i class="material-icons">
+            group
+          </i>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-fab (click)="selectMenu('challenges')">
+          <i class="material-icons">
+            stars
+          </i>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-fab (click)="selectMenu('medias')">
+          <i class="material-icons">
+            perm_media
+          </i>
+        </button>
+      </mat-list-item>
+      <mat-list-item *ngIf="isAdmin">
+        <button mat-fab (click)="selectMenu('admin')">
+          <i class="material-icons">
+            security
+          </i>
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-fab (click)="logout()">
+          <i class="material-icons">
+            power_settings_new
+          </i>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-sidenav-container>
+
+      <mat-sidenav mode="side" opened id="subMenu">
+
+        <ng-container [ngSwitch]="selectedMenu">
+
+          <ng-container *ngSwitchCase="'settings'">
+
+            <mat-list>
+              <mat-list-item [routerLink]="['/settings']"> Modify informations </mat-list-item>
+            </mat-list>
+
+          </ng-container>
+          <ng-container *ngSwitchCase="'chat'">
+
+            <mat-form-field>
+              <input [(ngModel)]="searchField" matInput placeholder="Search" type="search" #searchInput>
+              <button mat-button mat-raised-button matSuffix (click)="searchThread(searchInput.value)">
+                <mat-icon>search</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <mat-list>
+              <ng-container *ngFor="let thread of threads">
+                <mat-list-item (click)="redirectToThread(thread.discussionId)">
+
+                  <ng-container *ngIf="thread.name !== ''; else displayParticpants">
+                    {{ thread.name }}
+                  </ng-container>
+                  <ng-template #displayParticpants>
+                    {{ thread.participants | displayParticipantsChat | truncate :20 }}
+                  </ng-template>
+
+                </mat-list-item>
+              </ng-container>
+            </mat-list>
+
+          </ng-container>
+          <ng-container *ngSwitchCase="'groups'">
+
+            <mat-list>
+              <mat-list-item [routerLink]="['/groups']"> See all groups </mat-list-item>
+              <mat-list-item (click)="redirectToMyGroup()" *ngIf="isInAGroup"> My group </mat-list-item>
+              <mat-list-item [routerLink]="['/groups/create']" *ngIf="!isInAGroup && isAMember">
+                Create a group
+              </mat-list-item>
+            </mat-list>
+
+          </ng-container>
+          <ng-container *ngSwitchCase="'challenges'">
+
+            <mat-list>
+              <mat-list-item *ngIf="isAMember" [routerLink]="['/challenges']"> All challenges </mat-list-item>
+              <mat-list-item [routerLink]="['/challenges/stats']"> Global stats </mat-list-item>
+              <mat-list-item [routerLink]="['/challenges/create']">
+                Create a challenge
+              </mat-list-item>
+            </mat-list>
+
+          </ng-container>
+          <ng-container *ngSwitchCase="'medias'">
+
+            <!-- <a [routerLink]="['/medias']">Filter</a> -->
+            <a>Filter</a>
+
+
+          </ng-container>
+          <ng-container *ngSwitchCase="'admin'">
+
+            <mat-list>
+              <mat-list-item [routerLink]="['/admin/challenges']"> Challenges </mat-list-item>
+              <mat-list-item [routerLink]="['/admin/groups']"> Groups </mat-list-item>
+              <mat-list-item [routerLink]="['/admin/data']"> Data management </mat-list-item>
+              <mat-list-item [routerLink]="['/admin/user']"> User management </mat-list-item>
+            </mat-list>
+
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <p>DEFAULT</p>
+          </ng-container>
+        </ng-container>
+
+      </mat-sidenav>
+
+      <mat-sidenav-content id="content">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

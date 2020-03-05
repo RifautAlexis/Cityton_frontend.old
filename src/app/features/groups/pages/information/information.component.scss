@@ -1,0 +1,26 @@
+mat-grid-list {
+  width: 500px !important;
+
+}
+
+mat-grid-tile:hover {
+  background-color: #424242;
+  // width: 100px !important;
+}
+
+mat-divider {
+  margin: 25px 0 25px 0;
+}
+
+span {
+  display: inline-block;
+  padding: 10px 0 10px 0;
+}
+
+#requestButtons button {
+  margin: 0 0 0 15px;
+}
+
+#deleteGroupButton {
+  margin: 0 0 0 15px;
+}

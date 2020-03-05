@@ -1,0 +1,78 @@
+<section *ngIf="(messages$ | async) as messages">
+
+  <!-- connectionIsEstablished &&  -->
+  <div id="chat">
+
+    <ng-container *ngFor="let message of messages; let index = index">
+
+      <div>
+        <span class="author">{{ message.author.username }}</span>
+
+        <button mat-button [matMenuTriggerFor]="belowMenu" *ngIf="isNotAMember">
+          <i class="material-icons">
+            more_horiz
+          </i>
+        </button>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+          <button mat-menu-item (click)="removeMessage(message.id)"> Remove </button>
+        </mat-menu>
+
+        <div class="contentMessage">
+
+          <ng-container *ngIf="message.content || message.media; else contentRemoved">
+
+            <ng-container *ngIf="message.media; else noMedia">
+
+              <ng-container *ngIf="message.media.url; else contentRemoved">
+
+                <img [src]="message.media.url">
+
+                <ng-template *ngIf="message.content">
+
+                  <ng-container *ngIf="message.media && message.media.url">
+                    <br>
+                  </ng-container>
+
+                  {{ message.content }}
+
+                </ng-template>
+
+              </ng-container>
+
+            </ng-container>
+
+          </ng-container>
+
+          <ng-template #noMedia>
+            {{ message.content }}
+          </ng-template>
+
+          <ng-template #contentRemoved>
+            <span class="removed"> Has been removed </span>
+          </ng-template>
+
+          <!-- {{ message.createdAt }} -->
+        </div>
+
+        <mat-divider *ngIf="index < messages.length - 1"></mat-divider>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+  <div id="bottomChat">
+    <input type="text" placeholder="Type a message" #text />
+    <button type="button" (click)="sendMessage(text.value)"> Send </button>
+
+    <button type="button" mat-raised-button (click)="fileInput.click()">
+      <i class="material-icons">
+        photo_camera
+      </i>
+    </button>
+    <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+    <img [src]="url" *ngIf="url !== ''">
+  </div>
+
+</section>

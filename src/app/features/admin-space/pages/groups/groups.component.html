@@ -1,0 +1,22 @@
+<section>
+
+  <!-- ALERT -->
+
+  <h1> Action </h1>
+  <button mat-raised-button (click)="openCreateGroup()" color="accent"> Create a group </button>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="(minorGroups$ | async) as minorGroups">
+    <app-minor-groups *ngIf="minorGroups.length > 0" (parentDeleteGroup)="deleteGroup($event)"
+      (toEdit)="editGroup($event)" [minorGroups]="minorGroups"></app-minor-groups>
+
+    <mat-divider *ngIf="minorGroups.length > 0" ></mat-divider>
+  </ng-container>
+
+  <ng-container *ngIf="(groups$ | async) as groups">
+    <app-search-groups (parentDeleteGroup)="deleteGroup($event)" (toEdit)="editGroup($event)" (toSearch)="searchGroup($event)"
+      [groups]="groups" [searchField]="searchField"></app-search-groups>
+  </ng-container>
+
+</section>

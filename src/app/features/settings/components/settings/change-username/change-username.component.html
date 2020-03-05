@@ -1,0 +1,22 @@
+<h1> Change username </h1>
+<form [formGroup]="usernameForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <label> Username </label>
+    <input matNativeControl type="text" formControlName="username">
+
+    <mat-error *ngIf="usernameForm.get('username').hasError('required')"> Username required </mat-error>
+    <mat-error *ngIf="usernameForm.get('username').hasError('minlength')"> At least 3 characters required </mat-error>
+
+  </mat-form-field>
+
+  <ng-container *ngIf="usernameForm.get('username').invalid">
+    <mat-error *ngIf="usernameForm.get('username').errors?.uniqueUsername"> This username is already taken </mat-error>
+  </ng-container>
+
+  <br>
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="!usernameForm.valid"> Submit </button>
+  <button mat-raised-button color="accent" type="button" (click)="cancel(usernameForm)"> Cancel </button>
+
+</form>

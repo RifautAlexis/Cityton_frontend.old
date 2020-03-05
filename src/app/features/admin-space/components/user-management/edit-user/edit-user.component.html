@@ -1,0 +1,40 @@
+<h1 mat-dialog-title> Edit user {{ data.username }} </h1>
+
+<form [formGroup]="editUserForm">
+
+  <div mat-dialog-content>
+
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username">
+
+      <mat-error *ngIf="editUserForm.get('username').hasError('required')"> Username required </mat-error>
+      <mat-error *ngIf="editUserForm.get('username').hasError('minlength')"> At least 3 characters required </mat-error>
+
+    </mat-form-field>
+    <ng-container *ngIf="this.editUserForm.get('username').invalid">
+      <mat-error *ngIf="this.editUserForm.get('username').errors?.uniqueUsername"> This username is already taken
+      </mat-error>
+    </ng-container>
+
+    <mat-form-field>
+      <input matInput placeholder="Phone number" formControlName="phoneNumber">
+
+      <mat-error *ngIf="editUserForm.get('phoneNumber').hasError('required')"> Password required </mat-error>
+      <mat-error *ngIf="editUserForm.get('phoneNumber').hasError('minlength')"> Password required </mat-error>
+
+    </mat-form-field>
+    <ng-container *ngIf="this.editUserForm.errors">
+      <mat-error *ngIf="this.editUserForm.errors.uniquePhoneNumber"> This phone number is already taken </mat-error>
+    </ng-container>
+
+  </div>
+
+  <div mat-dialog-actions>
+
+    <button mat-raised-button color="accent" type="button" (click)="close()"> Cancel </button>
+    <button mat-raised-button color="accent" type="button"  [disabled]="!editUserForm.valid" [mat-dialog-close]="data" cdkFocusInitial> Apply
+    </button>
+
+  </div>
+
+</form>

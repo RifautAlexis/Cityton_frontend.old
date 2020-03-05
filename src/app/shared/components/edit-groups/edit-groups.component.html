@@ -1,0 +1,72 @@
+<section *ngIf="(resultSRequests$ | async) as resultSRequests">
+
+  <h1> Create a group </h1>
+
+  <form [formGroup]="editGroupForm">
+
+    <mat-form-field>
+      <input matNativeControl type="text" placeholder="Name" #groupName formControlName="name">
+      <mat-hint> At least 3 characters </mat-hint>
+
+      <mat-error *ngIf="editGroupForm.get('name').hasError('required')"> Is Required </mat-error>
+      <mat-error *ngIf="editGroupForm.get('name').hasError('minlength')"> At least 3 characters </mat-error>
+
+    </mat-form-field>
+
+    <ng-container *ngIf="editGroupForm.get('name').invalid">
+      <mat-error *ngIf="editGroupForm.get('name').errors?.uniqueName"> This name is already taken
+      </mat-error>
+    </ng-container>
+
+    <!-- ******************************************************** -->
+
+    <mat-selection-list class="listUsers" #listUser formControlName="membersSelected">
+      <mat-list-option *ngFor="let user of usersWithoutGroup" [value]="user" (click)="checkCreator(user.id)"
+        [disabled]="getterForm('membersSelected').length >= resultSRequests[1].maxGroupSize && !usersSelectedContains(user.id)">
+        {{user.username}}
+      </mat-list-option>
+
+      <mat-error *ngIf="editGroupForm.get('membersSelected').hasError('required')"> Is Required </mat-error>
+
+    </mat-selection-list>
+
+    <!-- ******************************************************** -->
+
+    <ng-container *ngIf="getterForm('membersSelected') != undefined && getterForm('membersSelected').length > 0">
+      <h2> Select a creator </h2>
+      <mat-selection-list class="listUsers" #listMember formControlName="creatorSelected">
+        <mat-list-option *ngFor="let user of getterForm('membersSelected')" [value]="user"
+          [disabled]="isMember || getterForm('creatorSelected')[0] != null && (getterForm('creatorSelected').length == 0 || user.id != getterForm('creatorSelected')[0].id)">
+          {{user.username}}
+        </mat-list-option>
+      </mat-selection-list>
+    </ng-container>
+
+    <!-- ******************************************************** -->
+
+    <mat-card
+      *ngIf="(getterForm('name') != undefined && getterForm('name') != '') || (getterForm('membersSelected') != undefined && getterForm('membersSelected') != null && getterForm('membersSelected').length > 0)">
+
+      <mat-card-header>
+        <mat-card-title> {{groupName.value}} </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <div *ngFor="let member of getterForm('membersSelected')" class="username">
+          {{ member.username }}
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <br>
+
+    <button mat-raised-button color="accent" type="button" (click)="submit()" [disabled]="editGroupForm.invalid"> Submit
+    </button>
+    <button mat-raised-button color="accent" type="button" (click)="cancel()"> Cancel </button>
+
+  </form>
+
+</section>

@@ -1,0 +1,49 @@
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 22px;
+    font-weight: normal;
+
+    margin: 0 0 20px 0;
+  }
+}
+
+.mat-dialog-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+
+  mat-form-field {
+    margin: 0 0 0px 0;
+
+    label {
+      flex: 0 0 50%;
+      font-size: 12px;
+    }
+  }
+}
+
+#left-column {
+  margin: 0 10px 0 0;
+}
+
+#right-column {
+  margin: 0 0 0 10px;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  button {
+    margin-left: 10px;
+  }
+}

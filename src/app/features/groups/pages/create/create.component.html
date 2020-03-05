@@ -1,0 +1,22 @@
+<h1> Create a group </h1>
+<form [formGroup]="createGroupForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <label> Group name </label>
+    <input matNativeControl type="text" formControlName="name">
+
+    <mat-error *ngIf="createGroupForm.get('name').hasError('required')"> Name required </mat-error>
+    <mat-error *ngIf="createGroupForm.get('name').hasError('minlength')"> At least 3 characters required </mat-error>
+
+  </mat-form-field>
+
+  <ng-container *ngIf="createGroupForm.get('name').invalid">
+    <mat-error *ngIf="createGroupForm.get('name').errors?.uniqueName"> This name is already taken </mat-error>
+  </ng-container>
+
+  <br>
+
+  <button mat-raised-button color="accent" type="submit" [disabled]="!createGroupForm.valid"> Submit </button>
+  <button mat-raised-button color="accent" type="button" (click)="cancel(createGroupForm)"> Cancel </button>
+
+</form>

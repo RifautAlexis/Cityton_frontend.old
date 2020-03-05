@@ -1,0 +1,48 @@
+#search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 0 25px 0;
+
+  mat-form-field {
+    width: 25vw;
+  }
+
+  mat-button-toggle-group {
+    width: auto;
+  }
+}
+
+#results {
+  margin: 0 25px 0 0;
+
+  mat-card {
+    margin: 0 0 25px 0;
+
+    mat-card-actions {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      button {
+        display: none;
+      }
+    }
+  }
+
+  mat-card:hover {
+
+    mat-card-actions {
+
+      display: flex;
+
+      button {
+        display: block;
+        margin: 0 15px 0 0;
+      }
+    }
+  }
+
+
+}

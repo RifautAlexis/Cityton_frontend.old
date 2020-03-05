@@ -1,0 +1,49 @@
+<section>
+
+  <mat-form-field>
+    <input [(ngModel)]="searchField" matInput placeholder="Search" type="search">
+    <button mat-button mat-raised-button matSuffix (click)="onSubmit()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+</section>
+
+<section *ngIf="challengesSearched" id="results">
+
+  <ng-container *ngFor="let challenge of challengesSearched">
+
+    <mat-card>
+
+      <mat-card-header>
+        <mat-card-title> {{challenge.name}} </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        {{ challenge.statement }}
+
+        <div class="author">
+          {{ challenge.author }}
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-mini-fab (click)="openEdit(challenge.id)">
+          <i class="material-icons">
+            build
+          </i>
+        </button>
+        <button mat-mini-fab (click)="delete(challenge.id)">
+          <i class="material-icons">
+            delete
+          </i>
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </ng-container>
+
+</section>
