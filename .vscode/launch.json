@@ -9,9 +9,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Cityton.Ui/bin/Debug/netcoreapp3.0/Cityton.Ui.dll",
+            "program": "${workspaceFolder}/Cityton/bin/Debug/netcoreapp3.0/Cityton.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Cityton.Ui",
+            "cwd": "${workspaceFolder}/Cityton",
             "stopAtEntry": false,
             "serverReadyAction": {
                 "action": "openExternally",
